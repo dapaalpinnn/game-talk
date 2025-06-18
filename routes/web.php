@@ -1,10 +1,18 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GameController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/games', [GameController::class, 'index'])->name('games.index');
+Route::get('/games/{id}', [GameController::class, 'show'])->name('games.show');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/games/{gameId}/comments', [CommentController::class, 'store'])->name('comments.store');
 });
 
 Route::get('/dashboard', function () {
@@ -17,4 +25,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
