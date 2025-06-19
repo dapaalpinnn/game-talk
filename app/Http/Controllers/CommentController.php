@@ -28,4 +28,18 @@ class CommentController extends Controller
 
         return redirect()->back()->with('success', 'Comment added successfully!');
     }
+
+    public function destroy($gameId, $commentId)
+    {
+        $game = Game::findOrFail($gameId);
+        $comment = Comment::findOrFail($commentId);
+
+        if ($comment->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $comment->delete();
+
+        return redirect()->back()->with('success', 'Comment deleted successfully!');
+    }
 }

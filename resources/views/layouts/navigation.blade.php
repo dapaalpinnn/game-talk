@@ -5,20 +5,25 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('welcome') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
                 </div>
 
+                @guest
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex font-michroma">
+                    <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
+                        {{ __('Home') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('games.index')" :active="request()->routeIs('games.index')">
+                        {{ __('Games') }}
                     </x-nav-link>
                 </div>
+                @endguest
             </div>
-
             <!-- Settings Dropdown -->
+            @auth
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
@@ -43,7 +48,7 @@
                             @csrf
 
                             <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
+                                onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
@@ -51,6 +56,7 @@
                     </x-slot>
                 </x-dropdown>
             </div>
+            @endauth
 
             <!-- Hamburger -->
             <div class="-me-2 flex items-center sm:hidden">
@@ -65,6 +71,7 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
+    @auth
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
@@ -89,7 +96,7 @@
                     @csrf
 
                     <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
+                        onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
@@ -97,4 +104,5 @@
             </div>
         </div>
     </div>
+    @endauth
 </nav>
