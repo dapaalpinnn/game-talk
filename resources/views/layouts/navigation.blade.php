@@ -10,7 +10,6 @@
                     </a>
                 </div>
 
-                @guest
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex font-michroma">
                     <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
@@ -20,7 +19,6 @@
                         {{ __('Games') }}
                     </x-nav-link>
                 </div>
-                @endguest
             </div>
             <!-- Settings Dropdown -->
             @auth
