@@ -24,7 +24,7 @@
                     @csrf
                     @method('POST')
                     <input type="text" name="body" rows="4" class="w-full border rounded p-2 bg-transparent text-gray-200 font-semibold" placeholder="Add a comment..."></input>
-                    <button type="submit" class="mt-4 bg-white text-gray-800 px-4 py-1.5 rounded-xl hover:bg-gray-700">Send</button>
+                    <button type="submit" class="mt-4 bg-white text-gray-800 px-4 py-1.5 rounded-xl">Send</button>
                 </form>
                 @else
                 <p class="mb-4 text-gray-300">Please <a href="{{ route('login') }}" class="text-blue-500">login</a> to add a comment.</p>
